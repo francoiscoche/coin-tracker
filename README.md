@@ -3,6 +3,17 @@
 Personal project to train with Symfony.
 Purpose of the application: To be defined.
 
-## Skills used
+### Requirements
 
-- Symfony 6
+- PHP
+- Composer
+- Symfony CLI
+- nodejs & npm
+
+
+### Installation
+
+- composer install
+- npm install
+- npm run build
+- symfony server:start
