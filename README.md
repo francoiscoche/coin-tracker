@@ -13,7 +13,15 @@ Purpose of the application: To be defined.
 
 ### Installation
 
-- composer install
-- npm install
-- npm run build
-- symfony server:start
+```bash
+composer install
+npm install
+npm run build
+symfony server:start
+```
+
+ ## Unit test
+
+ ```bash
+ php unit/phpunit --testdox
+ ```
