@@ -23,7 +23,7 @@ class HomeController extends AbstractController
     }
 
 
-
+    // Allow the data refresh when click update button on the dashboard
     #[Route('/update', name: 'app_update')]
     public function update(CallApiCoinsService $callApiCoinsService, ManagerRegistry $doctrine): Response
     {
@@ -57,6 +57,18 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'allCurrency' => $allCurrency,
+        ]);
+    }
+
+    // Allow to open coin details when click on dashboard
+    #[Route('/coins/{coinId}', name: 'app_details')]
+    public function getDetails(ManagerRegistry $doctrine, $coinId = null) {
+        $entityManager = $doctrine->getManager();
+        $repository = $entityManager->getRepository(Currency::class);
+        $currency = $repository->findOneBy(['idCoin' => $coinId]);
+
+        return $this->render('home/details.html.twig', [
+            'currency' => $currency,
         ]);
     }
 }

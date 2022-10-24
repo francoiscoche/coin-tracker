@@ -24,7 +24,7 @@
   {% for coin in allCurrency %}
     <tr>
       <td><a class="btn btn-success" href='#'><i class="fa fa-plus"></i></a></th>
-      <td>{{ coin.name }}</th>
+      <td><a href={{ path("app_details",  {coinId: coin.idCoin}) }}>{{ coin.name }}</a></th>
       <td>$ {{ coin.currentPrice }}</td>
       <td>{{ coin.marketCap }}</td>
       <td>{{ coin.totalVolume }}</td>
