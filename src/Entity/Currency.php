@@ -30,19 +30,19 @@ class Currency
     private ?string $currentPrice = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $marketCap = null;
-
-    #[ORM\Column(nullable: true)]
     private ?int $marketCapRank = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $totalVolume = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $ath = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $lastUpdated = null;
+
+    #[ORM\Column(type: Types::BIGINT, nullable: true)]
+    private ?string $marketCap = null;
+
+    #[ORM\Column(type: Types::BIGINT, nullable: true)]
+    private ?string $totalVolume = null;
 
     public function getId(): ?int
     {
@@ -109,18 +109,6 @@ class Currency
         return $this;
     }
 
-    public function getMarketCap(): ?int
-    {
-        return $this->marketCap;
-    }
-
-    public function setMarketCap(?int $marketCap): self
-    {
-        $this->marketCap = $marketCap;
-
-        return $this;
-    }
-
     public function getMarketCapRank(): ?int
     {
         return $this->marketCapRank;
@@ -129,18 +117,6 @@ class Currency
     public function setMarketCapRank(?int $marketCapRank): self
     {
         $this->marketCapRank = $marketCapRank;
-
-        return $this;
-    }
-
-    public function getTotalVolume(): ?int
-    {
-        return $this->totalVolume;
-    }
-
-    public function setTotalVolume(?int $totalVolume): self
-    {
-        $this->totalVolume = $totalVolume;
 
         return $this;
     }
@@ -168,4 +144,29 @@ class Currency
 
         return $this;
     }
+
+    public function getMarketCap(): ?string
+    {
+        return $this->marketCap;
+    }
+
+    public function setMarketCap(?string $marketCap): self
+    {
+        $this->marketCap = $marketCap;
+
+        return $this;
+    }
+
+    public function getTotalVolume(): ?string
+    {
+        return $this->totalVolume;
+    }
+
+    public function setTotalVolume(?string $totalVolume): self
+    {
+        $this->totalVolume = $totalVolume;
+
+        return $this;
+    }
+
 }
