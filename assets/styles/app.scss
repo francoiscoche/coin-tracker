@@ -1,1 +1,74 @@
 @import "~bootstrap/scss/bootstrap";
+
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1300px;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+// @media (min-width: 992px) {
+//     .container {
+//         max-width: 960px;
+//     }
+// }
+
+// @media (min-width: 768px) {
+//     .container {
+//         max-width: 720px;
+//     }
+// }
+
+// @media (min-width: 576px) {
+//     .container {
+//         max-width: 540px;
+//     }
+// }
+
+.container, .container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+a {
+    text-decoration: none !important;
+}
+.name-coin {
+    font-weight: 600 !important;
+    color: black;
+}
+.img-coin {
+    width: 25px !important;
+    margin-right: 14px;
+}
+.table tr:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(249,250,251,var(--tw-bg-opacity));
+}
+
+a.js-link {
+    color: #e3c213;
+}
+
+.welcome-msg {
+    margin: 0 !important;
+}
+
+img.logo-img {
+    width: 50px;
+}
+
+.btn-log-in-out {
+    padding: 1px;
+    margin-left: 20px;
+}

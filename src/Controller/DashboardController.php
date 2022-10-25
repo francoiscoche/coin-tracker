@@ -29,7 +29,7 @@ class DashboardController extends AbstractController
         // get all fav user coins from database
         $favCoins = $doctrine->getRepository(Bookmark::class)->findBy(['user' => $user]);
 
-        return $this->render('dashboard/index.html.twig', [
+        return $this->render('dashboard.html.twig', [
             'favCoins' => $favCoins,
         ]);
     }

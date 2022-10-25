@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     {
         $allCurrency = $doctrine->getRepository(Currency::class)->findAll();
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home.html.twig', [
             'allCurrency' => $allCurrency,
         ]);
     }
@@ -60,7 +60,7 @@ class HomeController extends AbstractController
         }
         $allCurrency = $repository->findAll();
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home.html.twig', [
             'allCurrency' => $allCurrency,
         ]);
     }
@@ -77,7 +77,7 @@ class HomeController extends AbstractController
         $repository = $entityManager->getRepository(Currency::class);
         $currency = $repository->findOneBy(['idCoin' => $coinId]);
 
-        return $this->render('home/details.html.twig', [
+        return $this->render('details.html.twig', [
             'currency' => $currency,
         ]);
     }

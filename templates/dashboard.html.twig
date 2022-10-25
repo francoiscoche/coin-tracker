@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+            {# <th scope="col">#</th> #}
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Total volume</th>
+            <th scope="col">Ath</th>
+            <th scope="col">Last updated</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coin in favCoins %}
+            <tr>
+                <td><a class="name-coin" href={{ path("app_details",  {coinId: coin.idCurrency.idCoin}) }}>{{ coin.idCurrency.name }}</a></th>
+                <td>{{ coin.idCurrency.currentPrice | format_currency('USD', {fraction_digit: 4})  }}</td>
+                <td>{{ coin.idCurrency.marketCap | format_currency('USD', {fraction_digit: 4})  }}</td>
+                <td>{{ coin.idCurrency.totalVolume | format_currency('USD', {fraction_digit: 4})  }}</td>
+                <td>{{ coin.idCurrency.ath | format_currency('USD', {fraction_digit: 4})  }}</td>
+                <td>{{ coin.idCurrency.lastUpdated  | date("m/d/Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -5,8 +5,8 @@
 
 <div class="container">
 
-    <h2><img src="{{ currency.image }}" alt="">{{ currency.name }}</h2>
-    <p>{{ currency.currentPrice }}</p>
+    <h2><img class="img-coin" src="{{ currency.image }}" alt="">{{ currency.name }}</h2>
+    <p>{{ currency.currentPrice | format_currency('USD', {fraction_digit: 4})  }}</p>
 
 
 
@@ -14,7 +14,7 @@
     <tbody>
         <tr>
             <th scope="row">Market Cap</th>
-            <td>{{ currency.marketCap }}</td>
+            <td>{{ currency.marketCap | format_currency('USD', {fraction_digit: 4})  }}</td>
         </tr>
         <tr>
             <th scope="row">Market Cap Rank</th>
@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <th scope="row">Total Volume</th>
-            <td>{{ currency.totalVolume }}</td>
+            <td>{{ currency.totalVolume | format_currency('USD', {fraction_digit: 4})  }}</td>
         </tr>
     </tbody>
     </table>
