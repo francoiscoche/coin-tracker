@@ -13,27 +13,15 @@ class Bookmark
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idCoin = null;
-
     #[ORM\ManyToOne(inversedBy: 'bookmarks')]
     private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'bookmarks')]
+    private ?Currency $idCurrency = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCoin(): ?string
-    {
-        return $this->idCoin;
-    }
-
-    public function setIdCoin(string $idCoin): self
-    {
-        $this->idCoin = $idCoin;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -44,6 +32,18 @@ class Bookmark
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIdCurrency(): ?Currency
+    {
+        return $this->idCurrency;
+    }
+
+    public function setIdCurrency(?Currency $idCurrency): self
+    {
+        $this->idCurrency = $idCurrency;
 
         return $this;
     }

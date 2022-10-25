@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <h2><img src="{{ currency.image }}" alt="">{{ currency.name }}</h2>
+    <p>{{ currency.currentPrice }}</p>
+
+
+
+    <table class="table">
+    <tbody>
+        <tr>
+            <th scope="row">Market Cap</th>
+            <td>{{ currency.marketCap }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Market Cap Rank</th>
+            <td>{{ currency.marketCapRank }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Total Volume</th>
+            <td>{{ currency.totalVolume }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+
+</div>
+
+{% endblock %}
