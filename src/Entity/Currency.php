@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CurrencyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CurrencyRepository::class)]
@@ -43,6 +46,14 @@ class Currency
 
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
     private ?string $totalVolume = null;
+
+    #[ORM\OneToMany(mappedBy: 'idCurrency', targetEntity: Bookmark::class)]
+    private Collection $bookmarks;
+
+    public function __construct()
+    {
+        $this->bookmarks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -169,4 +180,47 @@ class Currency
         return $this;
     }
 
+    /**
+     * @return Collection<int, Bookmark>
+     */
+    public function getBookmarks(): Collection
+    {
+        return $this->bookmarks;
+    }
+
+    public function addBookmark(Bookmark $bookmark): self
+    {
+        if (!$this->bookmarks->contains($bookmark)) {
+            $this->bookmarks->add($bookmark);
+            $bookmark->setIdCurrency($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookmark(Bookmark $bookmark): self
+    {
+        if ($this->bookmarks->removeElement($bookmark)) {
+            // set the owning side to null (unless already changed)
+            if ($bookmark->getIdCurrency() === $this) {
+                $bookmark->setIdCurrency(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Let us know is this currency is favorite by user
+     *
+     * @param User $user
+     * @return boolean
+     */
+    public function isFavoritesByUser(User $user): bool {
+
+        foreach($this->bookmarks as $bookmark) {
+            if($bookmark->getUser() === $user) return true;
+        }
+        return false;
+    }
 }

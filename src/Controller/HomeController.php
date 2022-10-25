@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Bookmark;
 use App\Entity\Currency;
 use App\Service\CallApiCoinsService;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,8 +22,13 @@ class HomeController extends AbstractController
         ]);
     }
 
-
-    // Allow the data refresh when click update button on the dashboard
+    /**
+     * Allow the data refresh when click update button on the dashboard
+     *
+     * @param CallApiCoinsService $callApiCoinsService
+     * @param ManagerRegistry $doctrine
+     * @return Response
+     */
     #[Route('/update', name: 'app_update')]
     public function update(CallApiCoinsService $callApiCoinsService, ManagerRegistry $doctrine): Response
     {
@@ -38,16 +43,16 @@ class HomeController extends AbstractController
             $currency = $repository->findOneBy(['symbol' => $coin["symbol"]]);
 
             if ($currency) {
-                $currency->setIdCoin($coin["id"]);
-                $currency->setSymbol($coin["symbol"]);
-                $currency->setName($coin["name"]);
-                $currency->setImage($coin["image"]);
-                $currency->setCurrentPrice($coin["current_price"]);
-                $currency->setMarketCap($coin["market_cap"]);
-                $currency->setMarketCapRank($coin["market_cap_rank"]);
-                $currency->setTotalVolume($coin["total_volume"]);
-                $currency->setAth($coin["ath"]);
-                $currency->setLastUpdated($date);
+                $currency->setIdCoin($coin["id"])
+                        ->setSymbol($coin["symbol"])
+                        ->setName($coin["name"])
+                        ->setImage($coin["image"])
+                        ->setCurrentPrice($coin["current_price"])
+                        ->setMarketCap($coin["market_cap"])
+                        ->setMarketCapRank($coin["market_cap_rank"])
+                        ->setTotalVolume($coin["total_volume"])
+                        ->setAth($coin["ath"])
+                        ->setLastUpdated($date);
 
                 $entityManager->persist($currency);
                 $entityManager->flush();
@@ -60,7 +65,12 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // Allow to open coin details when click on dashboard
+    /**
+     * Allow to open coin details when click on dashboard
+     *
+     * @param ManagerRegistry $doctrine
+     * @return Response
+     */
     #[Route('/coins/{coinId}', name: 'app_details')]
     public function getDetails(ManagerRegistry $doctrine, $coinId = null) {
         $entityManager = $doctrine->getManager();
@@ -70,5 +80,55 @@ class HomeController extends AbstractController
         return $this->render('home/details.html.twig', [
             'currency' => $currency,
         ]);
+    }
+
+
+    /**
+     * Allow user to favorite a currency
+     *
+     * @param Currency $currency
+     * @param ManagerRegistry $doctrine
+     * @return Response
+     */
+     #[Route('/coins/{id}/fav', name:"app_fav")]
+    public function favorite(Currency $currency, ManagerRegistry $doctrine): Response {
+
+        $entityManager = $doctrine->getManager();
+        $bookmark= $entityManager->getRepository(Bookmark::class);
+
+        $user = $this->getUser();
+
+        // if there is no connected user, stop the process
+        if(!$user) return $this->json([
+            'message' => 'Unauthorized'
+        ], 403);
+
+
+        // if the currency is already favorite by the user, then it will unfavorite the currency
+        if($currency->isFavoritesByUser($user)) {
+            $fav = $bookmark->findOneBy([
+                'idCurrency' => $currency,
+                'user' => $user
+            ]);
+
+            $entityManager->remove($fav);
+            $entityManager->flush();
+
+            return $this->json([
+                'message' => 'non favorite'
+            ], 200);
+        }
+
+        // if the user is not favoring the currency then it will favorite the currency
+        $fav = new Bookmark();
+        $fav->setIdCurrency($currency)
+            ->setUser($user);
+
+        $entityManager->persist($fav);
+        $entityManager->flush();
+
+        return $this->json([
+            'message' => 'added fav'
+        ], 200);
     }
 }
