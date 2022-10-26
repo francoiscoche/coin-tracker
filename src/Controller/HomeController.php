@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Bookmark;
 use App\Entity\Currency;
+use App\Entity\Post;
 use App\Service\CallApiCoinsService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,13 +13,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    /**
+     * Return currency table and last news
+     *
+     * @param ManagerRegistry $doctrine
+     * @return Response
+     */
     #[Route('/', name: 'app_home')]
     public function index(ManagerRegistry $doctrine): Response
     {
+        // get all currency from database
         $allCurrency = $doctrine->getRepository(Currency::class)->findAll();
+
+        // get all news from database
+        $allPosts = $doctrine->getRepository(Post::class)->findAll();
 
         return $this->render('home.html.twig', [
             'allCurrency' => $allCurrency,
+            'allPosts' => $allPosts,
         ]);
     }
 
