@@ -18,9 +18,10 @@ const $ = require('jquery'); global.$ = global.jQuery = $;
 require('bootstrap');
 
 
-require('./js/index')
+require('./js/index');
 
-;// or you can include specific pieces
+
+// or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
 
