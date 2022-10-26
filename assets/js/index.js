@@ -10,11 +10,11 @@ function onClickBtnLike(event) {
     const notyf = new Notyf({
         duration: 3000,
         position: {
-            x: 'center',
-            y: 'top'
+            x: 'left',
+            y: 'bottom'
         },
         ripple: false,
-        dismissible: true
+        dismissible: false
     });
 
     axios.get(url).then(function(response) {

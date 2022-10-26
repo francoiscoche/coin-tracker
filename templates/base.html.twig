@@ -14,12 +14,12 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    {% include 'partials/nav.html.twig' %}
+    {% include 'partials/_nav.html.twig' %}
 
     <body>
         <section class="w-100 p-4 justify-content-center pb-4">
             {% block body %}{% endblock %}
         </section>
     </body>
-    {% include 'partials/footer.html.twig' %}
+    {% include 'partials/_footer.html.twig' %}
 </html>
