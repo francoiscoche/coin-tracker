@@ -1,10 +1,11 @@
 # CoinTracker
 
 Personal project to train with Symfony.
-App that allows you to follow the course of several currencies.
+App that allows you to follow stock markets.
 
 - ✅ [CoinGecko API](https://www.coingecko.com/en/api/documentation)
-- ✅ Creation of personal accounts to add currencies to favorite space
+- ✅ Personal space for managing favorite curency.
+- ✅ Integration of [notyf](https://github.com/caroso1222/notyf) library for notifications management.
 
 ### Requirements
 
@@ -39,4 +40,7 @@ symfony server:start
  
  ## App preview
  
- <img src="https://user-images.githubusercontent.com/102531037/197824801-c56619e4-3785-488d-bc41-a49da3352ad2.png" width="500"/>
+ <img src="https://user-images.githubusercontent.com/102531037/198005279-a1d33523-be30-4d8d-8412-478bb96a374a.gif" width="500"/>
+ 
+
+
