@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <section class="py-5 news">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for post in allPosts %}
+            <div class="col">
+            <div class="card h-100">
+                {# <img src="..." class="card-img-top" alt="..."> #}
+                <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">{{ post.date | date("m/d/Y H:i:s")  }}</small>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
