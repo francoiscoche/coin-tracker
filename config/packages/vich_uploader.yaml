@@ -1,0 +1,16 @@
+vich_uploader:
+    db_driver: orm # or mongodb or phpcr
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'
+
+    metadata:
+        type: attribute
+
+    mappings:
+        products:
+            uri_prefix: '%post_images%'
+            upload_destination: '%kernel.project_dir%/public%post_images%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
