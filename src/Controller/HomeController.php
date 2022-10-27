@@ -17,10 +17,11 @@ class HomeController extends AbstractController
      * Return currency table and last news
      *
      * @param ManagerRegistry $doctrine
+     * @param CallApiCoinsService $callApiCoinsService
      * @return Response
      */
     #[Route('/', name: 'app_home')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, CallApiCoinsService $callApiCoinsService): Response
     {
         // get all currency from database
         $allCurrency = $doctrine->getRepository(Currency::class)->findAll();
@@ -28,9 +29,17 @@ class HomeController extends AbstractController
         // get all news from database
         $allPosts = $doctrine->getRepository(Post::class)->findAll();
 
+        // trending API
+        $trending = $callApiCoinsService->getTrending();
+
+        // Data Defi API
+        $getDataDefi = $callApiCoinsService->getDecentralizedFinanceDefi();
+
         return $this->render('home.html.twig', [
             'allCurrency' => $allCurrency,
             'allPosts' => $allPosts,
+            'trending' => $trending['coins'],
+            'dataDefi' => $getDataDefi
         ]);
     }
 

@@ -13,6 +13,11 @@ class CallApiCoinsService
     }
 
 
+    /**
+     * Use this to obtain all the coins market data (price, market cap, volume)
+     *
+     * @return array
+     */
     public function getCoinsMarkets(): array {
 
         $response = $this->client->request('GET', 'https://api.coingecko.com/api/v3/coins/markets?', [
@@ -25,6 +30,28 @@ class CallApiCoinsService
             ],
         ]);
 
+        return $response->toArray();
+    }
+
+    /**
+     * Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)
+     *
+     * @return array
+     */
+    public function getTrending():array {
+
+        $response = $this->client->request('GET', 'https://api.coingecko.com/api/v3/search/trending');
+        return $response->toArray();
+    }
+
+    /**
+     * Get Top 100 Cryptocurrency Global Eecentralized Finance(defi) data)
+     *
+     * @return array
+     */
+    public function getDecentralizedFinanceDefi():array {
+
+        $response = $this->client->request('GET', 'https://api.coingecko.com/api/v3/global/decentralized_finance_defi');
         return $response->toArray();
     }
 }

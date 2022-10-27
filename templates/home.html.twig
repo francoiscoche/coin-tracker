@@ -27,6 +27,53 @@
     </div>
   </section>
 
+  <section>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card card-index">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-fire-flame-curved"></i> Trending</h5>
+            <p class="card-text">
+              <ul>
+                {% for trend in trending | slice(0, 3)  %}
+                  <li><span class="score-card">{{ (trend.item.score) + 1 }} </span> <img class="mx-3 img-coin" src="{{ trend.item.small }}" alt="" >{{ trend.item.name }} <span class="symbol-card">{{ trend.item.symbol }}</span> (rank {{ trend.item.market_cap_rank }})</span></li>
+                {% endfor %}
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-index">
+          <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-dollar-sign"></i>  Defi Data</h5>
+            <p class="card-text">
+                <table class="table table-borderless">
+                    <tbody>
+                      <tr>
+                        <td>Defi Market Cap</td>
+                        <td>{{ dataDefi.data.defi_market_cap | format_currency('USD', {fraction_digit: 4}) }}</td>
+                      </tr>
+                      <tr>
+                        <td>Trading Vol h24</td>
+                        <td>{{ dataDefi.data.trading_volume_24h | format_currency('USD', {fraction_digit: 4})  }}</td>
+                      </tr>
+                      <tr>
+                        <td>Top coin name</td>
+                        <td>{{ dataDefi.data.top_coin_name }}</td>
+                      </tr>
+                      <tr>
+                        <td>Top coin defi domminance</td>
+                        <td>{{ dataDefi.data.top_coin_defi_dominance | format_currency('USD', {fraction_digit: 4})  }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <table class="table mt-5">
     <thead>
       <tr>
