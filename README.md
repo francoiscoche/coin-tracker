@@ -6,7 +6,9 @@ This App allows you to follow stock markets currencies and get some news about s
 - ✅ [CoinGecko API](https://www.coingecko.com/en/api/documentation)
 - ✅ Integration of user accounts for the management of preferred currencies.
 - ✅ Integration of [notyf](https://github.com/caroso1222/notyf) library for notifications management.
-- ✅ EasyAdmin integration for administration pannel and "CRUD" news management.
+- ✅ [EasyAdmin](https://github.com/EasyCorp/EasyAdminBundle) integration for administration pannel and "CRUD" news management.
+- ✅ [VicUploader](https://github.com/dustin10/VichUploaderBundle) integration for images uploading in administration pannel.
+
 
 ### Requirements
 
