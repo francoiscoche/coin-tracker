@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container mt-4">
+    <h3>{{ newsById.title }}</h3>
+    <p>{{ newsById.content }}</p>
+    <span>Published the {{ newsById.date | date("m/d/Y H:i:s") }}</span>
+</div>
+{% endblock %}

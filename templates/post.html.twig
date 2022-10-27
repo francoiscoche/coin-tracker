@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
-
 {% block body %}
 
 <div class="container mt-4">
@@ -9,16 +7,18 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for post in allPosts %}
             <div class="col">
-            <div class="card h-100">
-                <img src='/uploads/images/{{ post.image }}' class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.content }}</p>
-                </div>
-                <div class="card-footer">
-                <small class="text-muted">{{ post.date | date("m/d/Y H:i:s")  }}</small>
-                </div>
-            </div>
+                <a href={{ path("app_slug", {'slug': post.slug } )}}>
+                    <div class="card h-100">
+                        <img src='/uploads/images/{{ post.image }}' class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content }}</p>
+                        </div>
+                        <div class="card-footer">
+                        <small class="text-muted">{{ post.date | date("m/d/Y H:i:s")  }}</small>
+                        </div>
+                    </div>
+                </a>
             </div>
             {% endfor %}
         </div>
