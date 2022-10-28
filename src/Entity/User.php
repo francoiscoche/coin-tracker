@@ -35,9 +35,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Bookmark::class)]
     private Collection $bookmarks;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PostLike::class)]
+    private Collection $Likes;
+
     public function __construct()
     {
         $this->bookmarks = new ArrayCollection();
+        $this->Likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,6 +138,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($bookmark->getUser() === $this) {
                 $bookmark->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostLike>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->Likes;
+    }
+
+    public function addLike(PostLike $like): self
+    {
+        if (!$this->Likes->contains($like)) {
+            $this->Likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(PostLike $like): self
+    {
+        if ($this->Likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
             }
         }
 
