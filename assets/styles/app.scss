@@ -88,6 +88,9 @@ ul {
     //   padding: 14px 80px 18px 36px;
     cursor: pointer;
     color:black !important;
+    .card-title {
+        color: black;
+    }
 
 .table > :not(caption) > * > * {
     padding: 0 !important;
@@ -110,4 +113,8 @@ ul {
 
 .card.card-index {
     min-height: 190px;
+}
+
+.like {
+    height: 100%;
 }

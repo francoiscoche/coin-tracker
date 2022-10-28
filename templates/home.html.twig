@@ -17,6 +17,16 @@
               <h5 class="card-title">{{ post.title }}</h5>
               <p class="card-text">{{ post.content }}</p>
             </div>
+            <div class="mx-3 my-3 like">
+            <a class="js-like" href={{ path("app_like", { 'id': post.id }) }}>
+              {% if app.user and post.isLikedByUser(app.user) %}
+                <i class="fa fa-heart"></i>
+              {% else %}
+                <i class="far fa-heart"></i>
+              {% endif %}
+              <span class="js-likes">{{ post.likes | length }}</span>
+            </a>
+            </div>
             <div class="card-footer">
               <small class="text-muted">{{ post.date | date("m/d/Y H:i:s")  }}</small>
             </div>
